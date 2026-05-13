@@ -1,0 +1,27 @@
+{
+  "name": "l7map-render",
+  "version": "1.0.0",
+  "description": "基于 AntV L7 的 Vue3 地图渲染组件",
+  "main": "src/components/l7mapRender/index.ts",
+  "scripts": {
+    "type-check": "vue-tsc --noEmit"
+  },
+  "dependencies": {
+    "@antv/l7": "^2.0.0",
+    "@antv/l7-maps": "^2.0.0",
+    "vue": "^3.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "vue-tsc": "^1.0.0"
+  },
+  "keywords": [
+    "vue3",
+    "antv-l7",
+    "map",
+    "visualization",
+    "webgl"
+  ],
+  "author": "",
+  "license": "MIT"
+}
