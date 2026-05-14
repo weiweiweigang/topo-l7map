@@ -11,6 +11,7 @@
 - **底图灵活切换**：支持高德、百度、天地图、离线瓦片等
 - **SVG 编辑层**：在地图上叠加 SVG 层实现拓扑编辑
 - **批量编辑**：支持拓扑数据的批量移动、旋转、缩放
+- **自定义底图叠加**：支持 CAD 图纸、区域地图叠加到地图上
 - **TypeScript**：完整的类型定义
 
 ## 安装
@@ -44,6 +45,15 @@ src/
 │           ├── move.ts            # 移动逻辑
 │           ├── rotate.ts          # 旋转逻辑
 │           └── spread.ts          # 缩放逻辑
+│   └── belowOtherJonConfig/    # 自定义底图配置组件
+│       ├── index.vue              # 主组件
+│       ├── js/
+│       │   ├── pictureMap.ts      # 图片坐标处理
+│       │   ├── picture.ts         # 图片上传
+│       │   └── customMapInit.ts   # 地图初始化配置
+│       └── components/
+│           ├── pictureMap/        # 图片叠加预览
+│           └── customMapInit/     # 地图中心配置
 └── utils/
     └── topologyBlockEdit.ts   # 拓扑批量编辑工具
 ```
@@ -117,6 +127,36 @@ function renderDataHandle() {
 </template>
 ```
 
+### 4. BelowOtherJonConfig - 自定义底图叠加组件
+
+用于将 CAD 图纸、区域地图等自定义图片叠加到地图上。用户可通过可视化交互确定图片的地理范围。
+
+```vue
+<template>
+  <BelowOtherJonConfig
+    v-model:show="show"
+    :other-param="otherParam"
+    @submit="onSubmit"
+  />
+</template>
+
+<script setup lang="ts">
+import BelowOtherJonConfig from './components/belowOtherJonConfig'
+
+const show = ref(false)
+const otherParam = ref('')
+
+function onSubmit(param: string) {
+  // param 包含图片 URL、地理范围、透明度等配置
+  const config = JSON.parse(param)
+  // config.imgUrl - 图片地址
+  // config.imgCoord - 地理范围 { xmin, xmax, ymin, ymax }
+  // config.opacity - 透明度
+  // config.hideMap - 是否隐藏底图
+}
+</script>
+```
+
 ## 性能优化
 
 1. **shallowRef**：L7 对象使用 shallowRef 避免深层响应式
@@ -130,6 +170,7 @@ function renderDataHandle() {
 - [数万设备流畅渲染：我用 AntV L7 封装 Vue3 地图组件的血泪经验](https://juejin.cn/post/xxx)
 - [在 L7 地图上实现拓扑编辑：SVG 叠加层与坐标同步的实战](https://juejin.cn/post/xxx)
 - [在 L7 地图上实现拓扑批量编辑：移动、旋转、缩放](https://juejin.cn/post/xxx)
+- [在 L7 地图上叠加自定义底图：CAD 图纸与特殊区域地图的实战方案](https://juejin.cn/post/xxx)
 - [TranslateBox 组件介绍](https://juejin.cn/post/7175558112189874235)
 
 ## License
